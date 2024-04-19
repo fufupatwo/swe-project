@@ -19,8 +19,8 @@ const handleSubmit = (event) => {
 export default function Example() {
   return (
     <div className="flex min-h-full items-center justify-center px-6 py-12 lg:px-8">
-      <div className="w-96 p-6 shadow-lg bg-orange-500 rounded-md">
-        <div className="sm:w-full">
+      <div className="w-96 p-6 items-center justify-center shadow-lg bg-orange-500 rounded-md">
+        <div className="sm:w-full items-center justify-center">
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 text-gray-900">
             Sign in
           </h2>
