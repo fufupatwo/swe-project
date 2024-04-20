@@ -16,7 +16,7 @@ const handleSubmit = (event) => {
     password: ''
   });
 };
-export default function Example() {
+export default function LandingPage() {
   return (
     <div className="flex min-h-full items-center justify-center px-6 py-12 lg:px-8">
       <div className="w-96 p-6 items-center justify-center shadow-lg bg-orange-500 rounded-md">
