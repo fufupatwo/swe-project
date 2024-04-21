@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
-import {createUserRoute, loginRoute, adminLoginRoute, postCreationRoute} from "./routes.mjs";
+import {createUserRoute, loginRoute, adminLoginRoute} from "./routes.mjs";
+import {postCreationRoute} from './createpostroute.mjs';
 import cors from "cors";
 
 
