@@ -131,7 +131,7 @@ export const adminLoginRoute = async (req, res) => {
     });
 };
 export const adminBanUserRoute = async (req, res) => {
-    const { useremail } = req.params;
+    const useremail = req.body.useremail;
 
     // Check if the user exists
     const searchUserSql = "SELECT * FROM userinfo WHERE useremail = ?";
@@ -143,16 +143,19 @@ export const adminBanUserRoute = async (req, res) => {
             return res.status(500).json({ error: "Server error" });
         }
 
+        console.log("Executing query:", searchUserQuery);
+
         connection.query(searchUserQuery, (err, userResult) => {
+            connection.release();
             if (err) {
                 console.error("Error searching for user:", err);
-                connection.release();
                 return res.status(500).json({ error: "Server error" });
             }
 
+            console.log("User search result:", userResult); // Log the search result
+
             if (userResult.length === 0) {
-                connection.release();
-                console.log("user not found");
+                console.log("User not found");
                 return res.status(404).json({ error: "User not found" });
             }
 
@@ -160,8 +163,9 @@ export const adminBanUserRoute = async (req, res) => {
             const updateUserSql = "UPDATE userinfo SET banned = ? WHERE useremail = ?";
             const updateQuery = mysql.format(updateUserSql, [true, useremail]);
 
+            console.log("Executing update query:", updateQuery); // Log the update query being executed
+
             connection.query(updateQuery, (err, updateResult) => {
-                connection.release();
                 if (err) {
                     console.error("Error updating user's ban status:", err);
                     return res.status(500).json({ error: "Server error" });
