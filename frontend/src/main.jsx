@@ -5,6 +5,7 @@ import './index.css';
 import LandingPage from './pages/LandingPage';
 import LoginPage from './pages/LoginPage';
 import CreateAccount from './pages/CreateAccount';
+import HomePage from './pages/HomePage';
 
 const router = createBrowserRouter([
   {
@@ -16,8 +17,12 @@ const router = createBrowserRouter([
     element: <LoginPage />
   },
   {
-    path:'CreateAccount',
+    path:'/CreateAccount',
     element: <CreateAccount />
+  },
+  {
+    path: '/Home',
+    element: <HomePage/>
   }
 ]);
 
