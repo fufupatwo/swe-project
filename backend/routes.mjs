@@ -143,6 +143,7 @@ export const adminBanUserRoute = async (req, res) => {
     const searchUserSql = "SELECT * FROM userinfo WHERE useremail = ?";
     const searchUserQuery = mysql.format(searchUserSql, [useremail]);
 
+
     db.getConnection(async (err, connection) => {
         if (err) {
             console.error("Error getting database connection:", err);
