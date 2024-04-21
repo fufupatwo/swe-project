@@ -63,13 +63,13 @@ export const createUserRoute = async (req, res) => {
 
 // Login logic for authenticating a user
 export const loginRoute = async (req, res) => {
-    const user = req.body.name;
+    const useremail = req.body.useremail;
     const password = req.body.password;
 
     db.getConnection(async (err, connection) => {
         if (err) throw err;
-        const sqlSearch = "SELECT * FROM userinfo WHERE user = ?";
-        const search_query = mysql.format(sqlSearch, [user]);
+        const sqlSearch = "SELECT * FROM userinfo WHERE useremail = ?";
+        const search_query = mysql.format(sqlSearch, [useremail]);
 
         await connection.query(search_query, async (err, result) => {
             connection.release();
@@ -82,7 +82,7 @@ export const loginRoute = async (req, res) => {
                 const hashedPassword = result[0].password;
                 if (await bcrypt.compare(password, hashedPassword)) {
                     console.log("---> login was successful");
-                    return res.send(`${user} is logged in!`);
+                    return res.send(`${useremail} is logged in!`);
                 } else {
                     console.log("---> pass was incorrect");
                     return res.send("Password incorrect");

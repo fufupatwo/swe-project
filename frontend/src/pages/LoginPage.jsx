@@ -2,35 +2,37 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const [formData, formatData] = useState({
-  useremail:'',
-  password:'',
-});
-const setFormData = (e) => {
-  const {name, value} = e.target;
-  formatData({
-      ...formData,
-      [name]: value,
-  });
-};
-
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  const navigate = useNavigate();
-  try {
-    const res = await axios.post('/login', formData);
-      navigate('/LandingPage');
-  } 
-  catch(error){
-    console.error("An error occurred:", error);
-  }
-
-  setFormData({
-      email:'',
-      password:'',
-  });
-}
 export default function LoginPage() {
+  const navigate = useNavigate(); 
+
+  const [formData, setFormData] = useState({
+    useremail: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value
+    });
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post("http://localhost:4000/login", formData);
+      console.log(res);
+      navigate('/');
+    } catch (error) {
+      console.error("An error occurred:", error);
+    }
+
+    setFormData({
+      useremail: "",
+      password: "",
+    });
+  };
+
   return (
     <div className="flex min-h-full items-center justify-center px-6 py-12 lg:px-8">
       <div className="w-96 p-6 items-center justify-center shadow-lg bg-orange-500 rounded-md">
@@ -42,12 +44,12 @@ export default function LoginPage() {
         <form onSubmit={handleSubmit}>
           <div className="mt-6">
             <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-50">Email</label>
-            <input onChange={setFormData} id="email" name="email" type="email" autoComplete="email" required className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+            <input onChange={handleChange} id="useremail" name="useremail" type="useremail" autoComplete="email" value={formData.useremail} required className="block w-full rounded-md border-0 py-1.5 text-gray-300 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
           </div>
 
           <div className="mt-6">
             <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-50">Password</label>
-            <input onChange={setFormData} id="password" name="password" type="password" autoComplete="current-password" required className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+            <input onChange={handleChange} id="password" name="password" type="password" autoComplete="current-password" value={formData.password} required className="block w-full rounded-md border-0 py-1.5 text-gray-300 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
           </div>
 
           <div className="mt-6">
@@ -63,5 +65,3 @@ export default function LoginPage() {
     </div>
   );
 }
-
-
