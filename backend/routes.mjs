@@ -79,6 +79,12 @@ export const loginRoute = async (req, res) => {
                 console.log("---> user does not exist");
                 return res.sendStatus(404);
             } else {
+                const banned = result[0].banned;
+                if (banned) {
+                    console.log("---> user is banned");
+                    return res.send("You are banned. Please contact admin.");
+                }
+
                 const hashedPassword = result[0].password;
                 if (await bcrypt.compare(password, hashedPassword)) {
                     console.log("---> login was successful");
