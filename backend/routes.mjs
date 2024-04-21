@@ -91,3 +91,43 @@ export const loginRoute = async (req, res) => {
         });
     });
 };
+// Admin login route
+export const adminLoginRoute = async (req, res) => {
+    const adminName = req.body.adminName;
+    const adminPassword = req.body.adminPassword;
+
+    db.getConnection(async (err, connection) => {
+        if (err) {
+            console.error("Error getting database connection:", err);
+            return res.status(500).json({ error: "Server error" });
+        }
+
+        // Query the database to get admin data by username
+        const sqlSearch = "SELECT * FROM admin_information WHERE admin_username = ?";
+        const searchQuery = mysql.format(sqlSearch, [adminName]);
+
+        connection.query(searchQuery, async (err, result) => {
+            connection.release();
+            if (err) {
+                console.error("Error executing search query:", err);
+                return res.status(500).json({ error: "Server error" });
+            }
+
+            // If no admin found or incorrect password, return unauthorized
+            if (result.length === 0 || result[0].admin_password !== adminPassword) {
+                console.log("---> admin authentication failed");
+                return res.sendStatus(401); // Unauthorized access
+            }
+
+            // If authenticated, return admin data in JSON format
+            console.log("---> admin login successful");
+            const adminData = {
+                admin_id: result[0].admin_id,
+                admin_username: result[0].admin_username,
+                admin_email: result[0].admin_email
+            };
+            return res.status(200).json(adminData);
+        });
+    });
+};
+
