@@ -79,6 +79,12 @@ export const loginRoute = async (req, res) => {
                 console.log("---> user does not exist");
                 return res.sendStatus(404);
             } else {
+                const banned = result[0].banned;
+                if (banned) {
+                    console.log("---> user is banned");
+                    return res.send("You are banned. Please contact admin.");
+                }
+
                 const hashedPassword = result[0].password;
                 if (await bcrypt.compare(password, hashedPassword)) {
                     console.log("---> login was successful");
@@ -130,4 +136,50 @@ export const adminLoginRoute = async (req, res) => {
         });
     });
 };
+export const adminBanUserRoute = async (req, res) => {
+    const useremail = req.body.useremail;
 
+    // Check if the user exists
+    const searchUserSql = "SELECT * FROM userinfo WHERE useremail = ?";
+    const searchUserQuery = mysql.format(searchUserSql, [useremail]);
+
+    db.getConnection(async (err, connection) => {
+        if (err) {
+            console.error("Error getting database connection:", err);
+            return res.status(500).json({ error: "Server error" });
+        }
+
+        console.log("Executing query:", searchUserQuery);
+
+        connection.query(searchUserQuery, (err, userResult) => {
+            connection.release();
+            if (err) {
+                console.error("Error searching for user:", err);
+                return res.status(500).json({ error: "Server error" });
+            }
+
+            console.log("User search result:", userResult); // Log the search result
+
+            if (userResult.length === 0) {
+                console.log("User not found");
+                return res.status(404).json({ error: "User not found" });
+            }
+
+            // Update user's ban status
+            const updateUserSql = "UPDATE userinfo SET banned = ? WHERE useremail = ?";
+            const updateQuery = mysql.format(updateUserSql, [true, useremail]);
+
+            console.log("Executing update query:", updateQuery); // Log the update query being executed
+
+            connection.query(updateQuery, (err, updateResult) => {
+                if (err) {
+                    console.error("Error updating user's ban status:", err);
+                    return res.status(500).json({ error: "Server error" });
+                }
+
+                console.log("---> User ban status updated successfully");
+                return res.status(200).json({ message: "User ban status updated successfully" });
+            });
+        });
+    });
+};
