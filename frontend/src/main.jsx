@@ -2,17 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'; 
 import './index.css';
-import LandingPage from './pages/LandingPage';
 import LoginPage from './pages/LoginPage';
 import CreateAccount from './pages/CreateAccount';
 
 const router = createBrowserRouter([
+
   {
     path: '/',
-    element: <LandingPage />
-  },
-  {
-    path: '/Login',
     element: <LoginPage />
   },
   {
