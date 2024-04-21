@@ -8,6 +8,7 @@ const HomePage = () => {
     const [titleError, setTitleError] = useState(false);
     const [descriptionError, setDescriptionError] = useState(false);
     const [amountError, setAmountError] = useState(false);
+    const [images, setImages] = useState([]);
 
     const openModal = () => {
         setIsOpen(true);
@@ -30,6 +31,22 @@ const HomePage = () => {
     const handleAmountChange = (e) => {
         setAmount(e.target.value);
         setAmountError(false);
+    };
+
+    const handleImageChange = (e) => {
+        const files = e.target.files;
+        const newImages = Array.from(files).map(file => ({
+            url: URL.createObjectURL(file),
+            name: file.name,
+            size: file.size,
+        }));
+        setImages([...images, ...newImages]);
+    };
+
+    const handleRemoveImage = (index) => {
+        const newImages = [...images];
+        newImages.splice(index, 1);
+        setImages(newImages);
     };
 
     const handleSave = () => {
@@ -103,6 +120,25 @@ const HomePage = () => {
                                 required
                             />
                             {amountError && <span className="text-sm text-red-600">Amount is required</span>}
+                            <div className="mb-2 font-semibold text-gray-700">Image:</div>
+                            <input
+                                type="file"
+                                multiple
+                                onChange={handleImageChange}
+                                className="mb-5"
+                            />
+                            <div className="flex flex-wrap">
+                                {images.map((image, index) => (
+                                    <div key={index} className="relative w-32 h-32 mr-2 mb-2">
+                                        <img src={image.url} alt={image.name} className="w-32 h-32 object-cover rounded" />
+                                        <button onClick={() => handleRemoveImage(index)} className="absolute top-0 right-0 mt-1 mr-1 bg-red-500 text-white rounded-full p-1">
+                                            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                ))}
+                            </div>
                             {/* More modal content */}
                             {/* Add your additional modal content here */}
                         </div>
