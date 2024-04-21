@@ -1,6 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
-import {createUserRoute, loginRoute, adminLoginRoute} from "./routes.mjs";
+import {createUserRoute, loginRoute, adminLoginRoute, adminBanUserRoute} from "./routes.mjs";
 import cors from "cors"
 
 
@@ -15,6 +15,7 @@ app.use(cors());
 app.post("/register", createUserRoute);
 app.post("/login", loginRoute);
 app.post("/admin", adminLoginRoute);
+app.post("ban", adminBanUserRoute);
 
 
 const PORT = process.env.PORT || 4000; // Default port 5173
