@@ -3,7 +3,7 @@ import mysql from "mysql";
 
 
 export const postCreationRoute = async (req, res) => {
-    const { useremail, itemtitle, itemdescription, itemprice } = req.body;
+    const { itemtitle, itemdescription, itemprice, useremail } = req.body;
 
     if (!useremail || !itemtitle || !itemdescription || !itemprice) {
         return res.status(400).json({ error: "All fields are required" });
