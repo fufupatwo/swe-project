@@ -15,7 +15,7 @@ app.use(cors());
 app.post("/register", createUserRoute);
 app.post("/login", loginRoute);
 app.post("/admin", adminLoginRoute);
-app.post("ban", adminBanUserRoute);
+app.post("/ban", adminBanUserRoute);
 
 
 const PORT = process.env.PORT || 4000; // Default port 5173
