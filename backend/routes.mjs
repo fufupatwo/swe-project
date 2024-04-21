@@ -93,8 +93,8 @@ export const loginRoute = async (req, res) => {
 };
 // Admin login route
 export const adminLoginRoute = async (req, res) => {
-    const adminName = req.body.adminName;
-    const adminPassword = req.body.adminPassword;
+    const adminName = req.body.admin_username;
+    const adminPassword = req.body.admin_password;
 
     db.getConnection(async (err, connection) => {
         if (err) {
