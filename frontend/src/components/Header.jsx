@@ -75,8 +75,9 @@ export default function Header() {
         {!undersize ? (
           <>
             <nav className="flex items-center justify-center gap-16 flex-1 [&>a:hover]:text-orange-500">
-              <a href="/home">Home</a>
+              <a>Home</a>
               <a href="/catalog">Catalog</a>
+              <a href="/home">Create Post</a>
             </nav>
             <a
               className="px-8 py-2 rounded-lg hover:!border-orange-500 hover:text-orange-500"
@@ -85,7 +86,7 @@ export default function Header() {
                 borderColor: theme == "white" ? "#222222" : "#ffffff",
               }}
               id="login"
-              href="/login"
+              href="/"
             >
               Log In
             </a>
@@ -100,8 +101,9 @@ export default function Header() {
           </button>
         )}
         <HeaderDropdown display={dropdownToggled} offset={headerHeight}>
-          <a href="/home">Home</a>
+          <a>Home</a>
           <a href="/posts">Posts</a>
+          <a href="/home">Create Post</a>
         </HeaderDropdown>
       </header>
     </>
