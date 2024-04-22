@@ -2,6 +2,7 @@ import mysql from "mysql";
 import dotenv from "dotenv";
 import express from "express";
 
+
 dotenv.config();
 const DB_HOST = process.env.DBHOST
 const DB_USER = process.env.DBUSER
@@ -20,4 +21,4 @@ const db = mysql.createPool({
     database: DB_DATABASE,
     port: DB_PORT
 });
-export default db;
+export default (app, db);
