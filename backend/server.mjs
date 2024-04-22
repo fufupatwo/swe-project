@@ -19,7 +19,7 @@ app.post("/login", loginRoute);
 app.post("/admin", adminLoginRoute);
 app.post("/ban", adminBanUserRoute);
 app.post("/post_creation",postCreationRoute);
-app.get("/home",allPostsRoute);
+app.get("/home", allPostsRoute);
 
 
 const PORT = process.env.PORT || 4000; // Default port 5173
