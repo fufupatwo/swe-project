@@ -5,6 +5,7 @@ import './index.css';
 import LoginPage from './pages/LoginPage';
 import CreateAccount from './pages/CreateAccount';
 import HomePage from './pages/HomePage';
+import ForgotPassword from "./pages/ForgotPasswordPage.jsx";
 
 const router = createBrowserRouter([
 
@@ -18,7 +19,11 @@ const router = createBrowserRouter([
   },
   {
     path: '/Home',
-    element: <HomePage/>
+    element: <HomePage/>,
+  },
+  {
+    path: 'ForgotPasswordPage',
+    element: <ForgotPassword />
   }
 ]);
 
