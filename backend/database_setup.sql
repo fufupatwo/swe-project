@@ -1,10 +1,11 @@
 -- Create User Information Table
-CREATE TABLE IF NOT EXISTS user_information (
+CREATE TABLE IF NOT EXISTS userinfo (
     userid INT AUTO_INCREMENT PRIMARY KEY,
     user_fname VARCHAR(100) NOT NULL,
     user_lname VARCHAR(100) NOT NULL,
     useremail VARCHAR(100) UNIQUE NOT NULL,
-    password VARCHAR(100) NOT NULL
+    password VARCHAR(100) NOT NULL,
+    banned TINYINT NULL
 );
 
 -- Create Item Listing Table
@@ -14,9 +15,7 @@ CREATE TABLE IF NOT EXISTS item_listing (
     itemtitle VARCHAR(100) NOT NULL,
     itemdescription TEXT NOT NULL,
     itemprice FLOAT NOT NULL,
-    itemavailability BOOLEAN NOT NULL,
-    itemposteddate DATETIME NOT NULL,
-    FOREIGN KEY (userid) REFERENCES user_information(userid)
+    FOREIGN KEY (userid) REFERENCES userinfo(userid)
 );
 
 -- Create Transaction Info Table
@@ -27,7 +26,7 @@ CREATE TABLE IF NOT EXISTS transaction_history (
     transdate DATETIME NOT NULL,
     trans_status VARCHAR(50) NOT NULL,
     FOREIGN KEY (item_id) REFERENCES item_listing(item_id),
-    FOREIGN KEY (user_id) REFERENCES user_information(userid)
+    FOREIGN KEY (user_id) REFERENCES userinfo(userid)
 );
 
 -- Create Trading Post Table
