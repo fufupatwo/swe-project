@@ -6,9 +6,11 @@ const HomePage = () => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [amount, setAmount] = useState('');
+    const [userEmail, setUserEmail] = useState(''); // New state for user's email
     const [titleError, setTitleError] = useState(false);
     const [descriptionError, setDescriptionError] = useState(false);
     const [amountError, setAmountError] = useState(false);
+    const [emailError, setEmailError] = useState(false); // New state for email error
     const [images, setImages] = useState([]);
 
     const openModal = () => {
@@ -34,6 +36,11 @@ const HomePage = () => {
         setAmountError(false);
     };
 
+    const handleUserEmailChange = (e) => {
+        setUserEmail(e.target.value);
+        setEmailError(false); // Reset email error when user types in the input
+    };
+
     const handleImageChange = (e) => {
         const files = e.target.files;
         const newImages = Array.from(files).map(file => ({
@@ -49,8 +56,6 @@ const HomePage = () => {
         newImages.splice(index, 1);
         setImages(newImages);
     };
-
-
 
     const handleSave = async () => {
         let error = false;
@@ -70,6 +75,11 @@ const HomePage = () => {
             error = true;
         }
 
+        if (!userEmail) {
+            setEmailError(true); // Set email error if email is empty
+            error = true;
+        }
+
         if (error) return;
 
         try {
@@ -77,9 +87,8 @@ const HomePage = () => {
             formData.append('itemtitle', title);
             formData.append('itemdescription', description);
             formData.append('itemprice', amount);
-            formData.append('useremail', 'example@example.com');
+            formData.append('useremail', userEmail); // Use userEmail state
             formData.append('image', images[0]);
-
 
             const response = await axios.post('http://localhost:4000/post_creation', formData, {
                 headers: {
@@ -94,7 +103,6 @@ const HomePage = () => {
             // Handle error
         }
     };
-
 
     return (
         <div>
@@ -143,6 +151,16 @@ const HomePage = () => {
                                 required
                             />
                             {amountError && <span className="text-sm text-red-600">Amount is required</span>}
+                            <div className="mb-2 font-semibold text-gray-700">Email to contact seller:</div>
+                            <input
+                                type="email"
+                                value={userEmail}
+                                onChange={handleUserEmailChange}
+                                placeholder="Enter your email..."
+                                className={`w-full p-5 bg-white border border-gray-200 rounded shadow-sm mb-5 text-gray-800 ${emailError && 'border-red-500'}`}
+                                required
+                            />
+                            {emailError && <span className="text-sm text-red-600">Email is required</span>}
                             <div className="mb-2 font-semibold text-gray-700">Image:</div>
                             <input
                                 type="file"
