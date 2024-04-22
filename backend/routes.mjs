@@ -4,9 +4,9 @@ import mysql from "mysql";
 
 // Create user route
 export const createUserRoute = async (req, res) => {
-    const { user_fname, user_lname, useremail, password, passwordConfirm } = req.body;
+    const { user_fname, user_lname, useremail, password, passwordConfirm, securityQuestion } = req.body;
 
-    if (!user_fname || !user_lname || !useremail || !password || !passwordConfirm) {
+    if (!user_fname || !user_lname || !useremail || !password || !passwordConfirm || !securityQuestion) {
         return res.status(400).json({ error: "All fields are required" });
     }
 
@@ -39,8 +39,8 @@ export const createUserRoute = async (req, res) => {
                     connection.release();
                     return res.status(409).json({ error: "User already exists" });
                 } else {
-                    const sqlInsert = "INSERT INTO userinfo (user_fname, user_lname, useremail, password) VALUES (?, ?, ?, ?)";
-                    const insertQuery = mysql.format(sqlInsert, [user_fname, user_lname, useremail, hashedPassword]);
+                    const sqlInsert = "INSERT INTO userinfo (user_fname, user_lname, useremail, password, security) VALUES (?, ?, ?, ?, ?)";
+                    const insertQuery = mysql.format(sqlInsert, [user_fname, user_lname, useremail, hashedPassword, securityQuestion]);
 
                     connection.query(insertQuery, (err, result) => {
                         connection.release();
