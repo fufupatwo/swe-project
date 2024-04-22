@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 const HomePage = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const [title, setTitle] = useState('');
-    const [description, setDescription] = useState('');
-    const [amount, setAmount] = useState('');
-    const [titleError, setTitleError] = useState(false);
-    const [descriptionError, setDescriptionError] = useState(false);
-    const [amountError, setAmountError] = useState(false);
-    const [images, setImages] = useState([]);
+    const [formData, setFormData] = useState({
+        title: '',
+        description: '',
+        amount: '',
+        userEmail: ''
+    });
+    const [errors, setErrors] = useState({});
 
     const openModal = () => {
         setIsOpen(true);
@@ -18,59 +19,32 @@ const HomePage = () => {
         setIsOpen(false);
     };
 
-    const handleTitleChange = (e) => {
-        setTitle(e.target.value);
-        setTitleError(false);
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({
+            ...formData,
+            [name]: value
+        });
+        setErrors({
+            ...errors,
+            [name]: false
+        });
     };
 
-    const handleDescriptionChange = (e) => {
-        setDescription(e.target.value);
-        setDescriptionError(false);
-    };
-
-    const handleAmountChange = (e) => {
-        setAmount(e.target.value);
-        setAmountError(false);
-    };
-
-    const handleImageChange = (e) => {
-        const files = e.target.files;
-        const newImages = Array.from(files).map(file => ({
-            url: URL.createObjectURL(file),
-            name: file.name,
-            size: file.size,
-        }));
-        setImages([...images, ...newImages]);
-    };
-
-    const handleRemoveImage = (index) => {
-        const newImages = [...images];
-        newImages.splice(index, 1);
-        setImages(newImages);
-    };
-
-    const handleSave = () => {
-        let error = false;
-
-        if (!title) {
-            setTitleError(true);
-            error = true;
+    const handleSave = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await axios.post("http://localhost:4000/post_creation", {
+                itemtitle: formData.title,
+                itemdescription: formData.description,
+                itemprice: formData.amount,
+                useremail: formData.userEmail
+            });
+            console.log(response.data);
+            closeModal();
+        } catch (error) {
+            console.error("An error occurred:", error);
         }
-
-        if (!description) {
-            setDescriptionError(true);
-            error = true;
-        }
-
-        if (!amount) {
-            setAmountError(true);
-            error = true;
-        }
-
-        if (error) return;
-
-        // Proceed with saving data
-        closeModal();
     };
 
     return (
@@ -94,53 +68,47 @@ const HomePage = () => {
                             <div className="mb-2 font-semibold text-gray-700">Post Title:</div>
                             <input
                                 type="text"
-                                value={title}
-                                onChange={handleTitleChange}
+                                name="title"
+                                value={formData.title}
+                                onChange={handleChange}
                                 placeholder="Enter title..."
-                                className={`w-full p-5 bg-white border border-gray-200 rounded shadow-sm mb-5 text-gray-800 ${titleError && 'border-red-500'}`}
+                                className={`w-full p-5 bg-white border border-gray-200 rounded shadow-sm mb-5 text-gray-800 ${errors.title && 'border-red-500'}`}
                                 required
                             />
-                            {titleError && <span className="text-sm text-red-600">Title is required</span>}
+                            {errors.title && <span className="text-sm text-red-600">Title is required</span>}
                             <div className="mb-2 font-semibold text-gray-700">Item Description:</div>
                             <textarea
-                                value={description}
-                                onChange={handleDescriptionChange}
+                                name="description"
+                                value={formData.description}
+                                onChange={handleChange}
                                 placeholder="Type message..."
-                                className={`p-5 bg-white border border-gray-200 rounded shadow-sm h-36 mb-5 text-gray-800 ${descriptionError && 'border-red-500'}`}
+                                className={`p-5 bg-white border border-gray-200 rounded shadow-sm h-36 mb-5 text-gray-800 ${errors.description && 'border-red-500'}`}
                                 required
                             />
-                            {descriptionError && <span className="text-sm text-red-600">Description is required</span>}
+                            {errors.description && <span className="text-sm text-red-600">Description is required</span>}
                             <div className="mb-2 font-semibold text-gray-700">Amount:</div>
                             <input
                                 type="number"
-                                value={amount}
-                                onChange={handleAmountChange}
+                                name="amount"
+                                value={formData.amount}
+                                onChange={handleChange}
                                 placeholder="Enter amount..."
-                                className={`w-full p-5 bg-white border border-gray-200 rounded shadow-sm mb-5 text-gray-800 ${amountError && 'border-red-500'}`}
+                                className={`w-full p-5 bg-white border border-gray-200 rounded shadow-sm mb-5 text-gray-800 ${errors.amount && 'border-red-500'}`}
                                 required
                             />
-                            {amountError && <span className="text-sm text-red-600">Amount is required</span>}
-                            <div className="mb-2 font-semibold text-gray-700">Image:</div>
+                            {errors.amount && <span className="text-sm text-red-600">Amount is required</span>}
+                            <div className="mb-2 font-semibold text-gray-700">Email to contact seller:</div>
                             <input
-                                type="file"
-                                multiple
-                                onChange={handleImageChange}
-                                className="mb-5"
+                                type="email"
+                                name="userEmail"
+                                value={formData.userEmail}
+                                onChange={handleChange}
+                                placeholder="Enter your email..."
+                                className={`w-full p-5 bg-white border border-gray-200 rounded shadow-sm mb-5 text-gray-800 ${errors.userEmail && 'border-red-500'}`}
+                                required
                             />
-                            <div className="flex flex-wrap">
-                                {images.map((image, index) => (
-                                    <div key={index} className="relative w-32 h-32 mr-2 mb-2">
-                                        <img src={image.url} alt={image.name} className="w-32 h-32 object-cover rounded" />
-                                        <button onClick={() => handleRemoveImage(index)} className="absolute top-0 right-0 mt-1 mr-1 bg-red-500 text-white rounded-full p-1">
-                                            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-                                            </svg>
-                                        </button>
-                                    </div>
-                                ))}
-                            </div>
-                            {/* More modal content */}
-                            {/* Add your additional modal content here */}
+                            {errors.userEmail && <span className="text-sm text-red-600">Email is required</span>}
+                            {/* Image input and display removed */}
                         </div>
                         <div className="flex flex-row items-center justify-between p-5 bg-white border-t border-gray-200 rounded-bl-lg rounded-br-lg">
                             <p className="font-semibold text-gray-600" onClick={closeModal}>Cancel</p>
