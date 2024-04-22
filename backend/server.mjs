@@ -1,10 +1,11 @@
 import express from "express";
 import session from 'express-session';
 import dotenv from "dotenv";
-import {createUserRoute, loginRoute, adminLoginRoute, adminBanUserRoute, forgotPasswordRoute} from "./routes.mjs";
+import {createUserRoute, loginRoute, adminLoginRoute, adminBanUserRoute} from "./routes.mjs";
 import {postCreationRoute} from './createpostroute.mjs';
 import {allPostsRoute} from "./viewAllPosts.mjs";
 import {addCartRoute} from "./cart.mjs";
+import {viewCartRoute} from "./viewCart.mjs";
 import cors from "cors";
 
 
@@ -31,6 +32,7 @@ app.post("/ban", adminBanUserRoute);
 app.post("/post_creation",postCreationRoute);
 app.get("/home",allPostsRoute);
 app.post("/add_to_cart", addCartRoute);
+app.post("/view_cart", viewCartRoute);
 
 
 
