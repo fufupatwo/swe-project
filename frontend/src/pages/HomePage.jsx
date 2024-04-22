@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 const HomePage = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -49,7 +50,9 @@ const HomePage = () => {
         setImages(newImages);
     };
 
-    const handleSave = () => {
+
+
+    const handleSave = async () => {
         let error = false;
 
         if (!title) {
@@ -69,9 +72,29 @@ const HomePage = () => {
 
         if (error) return;
 
-        // Proceed with saving data
-        closeModal();
+        try {
+            const formData = new FormData();
+            formData.append('itemtitle', title);
+            formData.append('itemdescription', description);
+            formData.append('itemprice', amount);
+            formData.append('useremail', 'example@example.com');
+            formData.append('image', images[0]);
+
+
+            const response = await axios.post('http://localhost:4000/post_creation', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+
+            console.log(response.data);
+            closeModal();
+        } catch (error) {
+            console.error('Error creating item listing:', error);
+            // Handle error
+        }
     };
+
 
     return (
         <div>
