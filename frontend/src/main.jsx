@@ -9,6 +9,8 @@ import HomePage from './pages/HomePage';
 import ForgotPassword from "./pages/ForgotPasswordPage.jsx";
 import Test from "./pages/test";
 import axios from "axios";
+import Paypage from './pages/Paypage'
+import LandingPage from './pages/LandingPage';
 
 
 const router = createBrowserRouter([
@@ -25,15 +27,22 @@ const router = createBrowserRouter([
     element: <HomePage />,
   },
   {
+    path: '/Pay',
+    element: <Paypage/>,
+  },
+  {
+    path: '/LandingPage',
+    element: <LandingPage/>,
+  },
+   {
+
     path: '/ForgotPasswordPage',
     element: <ForgotPassword />,
   },
   {
-
     path: "/Test",
     element: <Test />,
   },
-
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
