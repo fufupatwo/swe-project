@@ -31,10 +31,12 @@ export const postCreationRoute = async (req, res) => {
                     console.error("Error getting connection:", err);
                     return res.status(500).json({ error: "Server error" });
                 }
+   
 
                 // Retrieve userid based on useremail
                 const sqlSearchUser = "SELECT userid FROM userinfo WHERE useremail = ?";
                 const searchUserQuery = mysql.format(sqlSearchUser, [useremail]);
+
 
                 connection.query(searchUserQuery, (err, userResult) => {
                     if (err) {
