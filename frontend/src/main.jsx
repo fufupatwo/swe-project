@@ -1,3 +1,4 @@
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'; 
@@ -5,36 +6,47 @@ import './index.css';
 import LoginPage from './pages/LoginPage';
 import CreateAccount from './pages/CreateAccount';
 import HomePage from './pages/HomePage';
+import ForgotPassword from "./pages/ForgotPasswordPage.jsx";
+import Test from "./pages/test";
+import axios from "axios";
 import Paypage from './pages/Paypage'
 import LandingPage from './pages/LandingPage';
 
-const router = createBrowserRouter([
 
+const router = createBrowserRouter([
   {
-    path: '/',
-    element: <LoginPage />
+    path: "/",
+    element: <LoginPage />,
   },
   {
-    path:'/CreateAccount',
-    element: <CreateAccount />
+    path: "/CreateAccount",
+    element: <CreateAccount />,
   },
   {
-    path: '/Home',
-    element: <HomePage/>
+    path: "/Home",
+    element: <HomePage />,
   },
   {
     path: '/Pay',
-    element: <Paypage/>
+    element: <Paypage/>,
   },
   {
     path: '/LandingPage',
-    element: <LandingPage/>
+    element: <LandingPage/>,
+  },
+   {
+
+    path: '/ForgotPasswordPage',
+    element: <ForgotPassword />,
+  },
+  {
+    path: "/Test",
+    element: <Test />,
   },
 ]);
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <RouterProvider router={router} />
-  </React.StrictMode>
+  </React.StrictMode>,
 );
-export default Modal;
