@@ -1,3 +1,4 @@
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'; 
@@ -6,30 +7,37 @@ import LoginPage from './pages/LoginPage';
 import CreateAccount from './pages/CreateAccount';
 import HomePage from './pages/HomePage';
 import ForgotPassword from "./pages/ForgotPasswordPage.jsx";
+import Test from "./pages/test";
+import axios from "axios";
+
 
 const router = createBrowserRouter([
-
   {
-    path: '/',
-    element: <LoginPage />
+    path: "/",
+    element: <LoginPage />,
   },
   {
-    path:'/CreateAccount',
-    element: <CreateAccount />
+    path: "/CreateAccount",
+    element: <CreateAccount />,
   },
   {
-    path: '/Home',
-    element: <HomePage/>,
+    path: "/Home",
+    element: <HomePage />,
   },
   {
     path: '/ForgotPasswordPage',
-    element: <ForgotPassword />
-  }
+    element: <ForgotPassword />,
+  },
+  {
+
+    path: "/Test",
+    element: <Test />,
+  },
+
 ]);
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <RouterProvider router={router} />
-  </React.StrictMode>
+  </React.StrictMode>,
 );
-export default Modal;

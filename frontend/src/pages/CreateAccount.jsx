@@ -12,13 +12,14 @@ export default function CreateAccount() {
     password: '',
     passwordConfirm: '',
     securityQuestion: ''
+
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
-      [name]: value
+      [name]: value,
     });
   };
 
@@ -35,6 +36,7 @@ export default function CreateAccount() {
       });
       console.log(response)
       navigate('/')
+
     } catch (error) {
       console.error("An error occurred:", error);
     }
@@ -137,6 +139,8 @@ export default function CreateAccount() {
             <a href="/" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">Login</a>
           </p>
         </div>
+
+   
       </div>
   );
 }

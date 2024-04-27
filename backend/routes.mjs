@@ -88,6 +88,7 @@ export const loginRoute = async (req, res) => {
                 const hashedPassword = result[0].password;
                 if (await bcrypt.compare(password, hashedPassword)) {
                     console.log("---> login was successful");
+                    req.session.userid = result[0].userid;
                     return res.send(`${useremail} is logged in!`);
                 } else {
                     console.log("---> pass was incorrect");
