@@ -5,6 +5,7 @@ import "./index.css";
 import LoginPage from "./pages/LoginPage";
 import CreateAccount from "./pages/CreateAccount";
 import HomePage from "./pages/HomePage";
+import Test from "./pages/test";
 import axios from "axios";
 
 const router = createBrowserRouter([
@@ -19,9 +20,10 @@ const router = createBrowserRouter([
   {
     path: "/Home",
     element: <HomePage />,
-    loader: () => {
-      return axios.get("http://localhost:4000/home");
-    },
+  },
+  {
+    path: "/Test",
+    element: <Test />,
   },
 ]);
 
