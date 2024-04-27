@@ -98,40 +98,41 @@ const HomePage = () => {
 
         <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
           {posts.map((post, index) => (
-            <div key={index} className="group relative">
-              <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
-                {renderImage(post.photo)}
-              </div>
-              <div className="mt-4 flex justify-between">
-                <div>
-                  <h3 className="text-sm text-gray-700">{post.itemtitle}</h3>
-                  <p className="mt-1 text-sm text-gray-500">{post.itemdescription}</p>
+              <div key={index} className="group relative">
+                <div className="aspect-w-1 aspect-h-1 overflow-hidden bg-gray-200">
+                  {renderImage(post.photo)}
                 </div>
-                <p className="text-sm font-medium text-gray-900">${post.itemprice}</p>
+                <div className="mt-4 flex justify-between">
+                  <div>
+                    <h3 className="text-sm text-gray-700">{post.itemtitle}</h3>
+                    <p className="mt-1 text-sm text-gray-500">{post.itemdescription}</p>
+                  </div>
+                  <p className="text-sm font-medium text-gray-900">${post.itemprice}</p>
+                </div>
               </div>
-            </div>
           ))}
         </div>
       </div>
+
       <div>
         <div className="flex justify-center items-center">
           <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            onClick={openModal}
-            style={{ position: "absolute", top: "20px", right: "150px" }}// Adjusted margin-right for spacing
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              onClick={openModal}
+              style={{position: "absolute", top: "20px", right: "150px"}}// Adjusted margin-right for spacing
           >
             Create a Post!
           </button>
           <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            onClick={() => console.log("Logged out")} // Add your logout logic here
-            style={{ position: "absolute", top: "20px", right: "20px" }}
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              onClick={() => console.log("Logged out")} // Add your logout logic here
+              style={{position: "absolute", top: "20px", right: "20px"}}
           >
             Log Out
           </button>
         </div>
         {isOpen && (
-          <div className="fixed inset-0 z-50 flex justify-center items-center bg-black bg-opacity-50">
+            <div className="fixed inset-0 z-50 flex justify-center items-center bg-black bg-opacity-50">
             <div className="flex flex-col w-11/12 sm:w-5/6 lg:w-1/2 max-w-2xl mx-auto rounded-lg border border-gray-300 shadow-xl">
               <div className="flex flex-row justify-between p-6 bg-white border-b border-gray-200 rounded-tl-lg rounded-tr-lg">
                 <p className="font-semibold text-gray-800">
