@@ -45,11 +45,11 @@ export const createUserRoute = async (req, res) => {
                     connection.query(insertQuery, (err, result) => {
                         connection.release();
                         if (err) {
-                            console.error("Error executing insert query:", err);
+                            console.error("error executing insert query:", err);
                             return res.status(500).json({ error: "Server error" });
                         }
 
-                        console.log("New user created");
+                        console.log("new user created");
                         return res.status(201).json({ message: "User creation successful", userId: result.insertId });
                     });
                 }

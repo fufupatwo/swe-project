@@ -35,7 +35,7 @@ export const postCreationRoute = async (req, res) => {
 
                 const userid = userResult[0].userid;
 
-                // Insert item listing with retrieved userid
+                // insert with info from form
                 const sqlInsert = "INSERT INTO item_listing (userid, itemtitle, itemdescription, itemprice) VALUES (?, ?, ?, ?)";
                 const insertQuery = mysql.format(sqlInsert, [userid, itemtitle, itemdescription, itemprice]);
 
