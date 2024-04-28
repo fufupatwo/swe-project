@@ -16,7 +16,7 @@ import LandingPage from './pages/LandingPage';
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <LoginPage />,
+    element: <LandingPage />,
   },
   {
     path: "/CreateAccount",
@@ -29,10 +29,6 @@ const router = createBrowserRouter([
   {
     path: '/Pay',
     element: <Paypage/>,
-  },
-  {
-    path: '/LandingPage',
-    element: <LandingPage/>,
   },
    {
 
