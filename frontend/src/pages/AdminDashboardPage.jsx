@@ -1,17 +1,25 @@
 import React, { useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
-const AdminDashboard = () => {
-    const [userId, setUserId] = useState('');
-    const [postId, setPostId] = useState('');
+export default function AdminDashboard() {
+    const navigate = useNavigate();
 
-    const handleBanUser = () => {
-        // Code to ban user with userId
-        console.log(`User with ID ${userId} has been banned.`);
-    };
+    const [formData, setFormData] = useState({
+        useremail: "",
+    });
 
-    const handleDeletePost = () => {
-        // Code to delete post with postId
-        console.log(`Post with ID ${postId} has been deleted.`);
+    const handleBanUser = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await axios.post("http://localhost:4000/ban", {
+                useremail: formData.useremail,
+            });
+            console.log(response);
+            navigate('/admindashboardpage');
+        } catch (error) {
+            console.error("An error occurred:", error);
+        }
     };
 
     return (
@@ -22,10 +30,10 @@ const AdminDashboard = () => {
                 <h2 className="text-xl font-semibold mb-2">Ban User</h2>
                 <input
                     type="text"
-                    placeholder="Enter User ID"
-                    className="border border-gray-300 rounded-md p-2 mr-2"
-                    value={userId}
-                    onChange={(e) => setUserId(e.target.value)}
+                    placeholder="Enter User Email"
+                    className="border border-gray-300 rounded-md p-2 mr-2 text-black"
+                    value={formData.useremail} // Use formData.useremail as value
+                    onChange={(e) => setFormData({ ...formData, useremail: e.target.value })}
                 />
                 <button
                     className="bg-red-500 text-white px-4 py-2 rounded-md"
@@ -34,25 +42,6 @@ const AdminDashboard = () => {
                     Ban User
                 </button>
             </div>
-
-            <div>
-                <h2 className="text-xl font-semibold mb-2">Delete Post</h2>
-                <input
-                    type="text"
-                    placeholder="Enter Post ID"
-                    className="border border-gray-300 rounded-md p-2 mr-2"
-                    value={postId}
-                    onChange={(e) => setPostId(e.target.value)}
-                />
-                <button
-                    className="bg-red-500 text-white px-4 py-2 rounded-md"
-                    onClick={handleDeletePost}
-                >
-                    Delete Post
-                </button>
-            </div>
         </div>
     );
 };
-
-export default AdminDashboard;
