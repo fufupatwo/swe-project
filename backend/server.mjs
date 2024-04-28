@@ -5,7 +5,7 @@ import {createUserRoute, loginRoute, adminLoginRoute, adminBanUserRoute, forgotP
 import {allPostsRoute} from "./viewAllPosts.mjs"
 import { addCartRoute } from "./cart.mjs";
 import { postCreationRoute } from "./createpostroute.mjs";
-
+import {getPostByIdRoute} from "./getPostByIdRoute.mjs";
 
 import cors from "cors";
 
@@ -33,7 +33,9 @@ app.post("/post_creation", postCreationRoute);
 app.get("/home", allPostsRoute);
 app.post("/")
 app.post("/add_to_cart", addCartRoute);
+app.get("/post/:itemid", getPostByIdRoute);
 app.post("/forgot_password",forgotPasswordRoute);
+
 
 
 const PORT = process.env.PORT || 4000; // Default port 5173

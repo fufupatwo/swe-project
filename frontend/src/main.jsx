@@ -10,6 +10,7 @@ import ForgotPassword from "./pages/ForgotPasswordPage.jsx";
 import axios from "axios";
 import Paypage from './pages/Paypage'
 import LandingPage from './pages/LandingPage';
+import PostDetailPage from './pages/PostDetailPage.jsx';
 import AdminLogin from './pages/AdminLoginPage.jsx';
 import AdminDash from './pages/AdminDashboardPage';
 
@@ -41,6 +42,9 @@ const router = createBrowserRouter([
     element: <LoginPage />,
   },
   {
+    path: "/post/:item_id",
+    element: <PostDetailPage />
+  },
     path: '/AdminLoginPage',
     element: <AdminLogin/>,
   },
