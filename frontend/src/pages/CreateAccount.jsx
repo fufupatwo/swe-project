@@ -52,19 +52,19 @@ export default function CreateAccount() {
           </div>
           <form onSubmit={handleSubmit}>
             <div className="mt-6">
-              <label htmlFor="firstName" className="block text-sm font-medium leading-6 text-gray-50">First Name</label>
+              <label htmlFor="firstName" className="block text-sm font-bold leading-6 text-black">First Name</label>
               <input
                   onChange={handleChange}
                   id="firstName"
                   name="firstName"
                   type="text"
                   autoComplete="given-name"
-                  placeholder=" Enter your first name!"
+                  placeholder=" Enter your first name"
                   required
                   className="block w-full rounded-md border-0 py-1.5 text-gray-300 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
             </div>
             <div className="mt-6">
-              <label htmlFor="lastName" className="block text-sm font-medium leading-6 text-gray-50">Last Name</label>
+              <label htmlFor="lastName"className="block text-sm font-bold leading-6 text-black">Last Name</label>
               <input
                   onChange={handleChange}
                   id="lastName"
@@ -72,11 +72,11 @@ export default function CreateAccount() {
                   type="text"
                   autoComplete="family-name"
                   required
-                  placeholder=" Enter your last name!"
+                  placeholder=" Enter your last name"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-300 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
             </div>
             <div className="mt-6">
-              <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-50">Email</label>
+              <label htmlFor="email" className="block text-sm font-bold leading-6 text-black">Email</label>
               <input
                   onChange={handleChange}
                   id="email"
@@ -84,11 +84,11 @@ export default function CreateAccount() {
                   type="email"
                   autoComplete="email"
                   required
-                  placeholder=" Enter your email!"
+                  placeholder=" Enter your email"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-300 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
             </div>
             <div className="mt-6">
-              <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-50">Password</label>
+              <label htmlFor="password" className="block text-sm font-bold leading-6 text-black">Password</label>
               <input
                   onChange={handleChange}
                   id="password"
@@ -96,11 +96,11 @@ export default function CreateAccount() {
                   type="password"
                   autoComplete="new-password"
                   required
-                  placeholder=" Enter your password!"
+                  placeholder=" Enter your password"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-300 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
             </div>
             <div className="mt-6">
-              <label htmlFor="passwordConfirm" className="block text-sm font-medium leading-6 text-gray-50">Confirm Password</label>
+              <label htmlFor="passwordConfirm" className="block text-sm font-bold leading-6 text-black">Confirm Password</label>
               <input
                   onChange={handleChange}
                   id="passwordConfirm"
@@ -108,11 +108,11 @@ export default function CreateAccount() {
                   type="password"
                   autoComplete="new-password"
                   required
-                  placeholder=" Confirm your password!"
+                  placeholder=" Confirm your password"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-300 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
             </div>
             <div className="mt-6">
-              <label htmlFor="securityQuestion" className="block text-sm font-medium leading-6 text-gray-50">Security Question</label>
+              <label htmlFor="securityQuestion" className="block text-sm font-bold leading-6 text-black">Security Question</label>
               <input
                   onChange={handleChange}
                   id="securityQuestion"
@@ -137,7 +137,7 @@ export default function CreateAccount() {
           </p>
         </div>
 
-   
+
       </div>
   );
 }
