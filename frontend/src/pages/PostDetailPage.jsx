@@ -46,17 +46,23 @@ const PostDetailPage = () => {
       }
       return window.btoa(binary);
     };
-  return (
-    <div>
-       <div className="aspect-w-1 aspect-h-1">
-                {renderImage(post.photo)}
-              </div>
-      <h2>{post.itemtitle}</h2>
-      <p>{post.itemdescription}</p>
-      <p>${post.itemprice}</p>
-      
-    </div>
-  );
+    return (
+        <div className="flex items-center">
+          <div className="w-1/3">
+            <div className="aspect-w-1 aspect-h-1 rounded-lg overflow-hidden">
+              {renderImage(post.photo)}
+            </div>
+          </div>
+          <div className="w-2/3 px-8">
+            <h2 className="text-3xl font-bold mb-4">{post.itemtitle}</h2>
+            <p className="text-lg mb-4">{post.itemdescription}</p>
+            <p className="text-xl font-bold mb-4">${post.itemprice}</p>
+            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+              Add to Cart
+            </button>
+          </div>
+        </div>
+      );
 };
 
 export default PostDetailPage;
