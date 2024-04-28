@@ -43,8 +43,15 @@ export default function ForgotPasswordPage() {
                 <form onSubmit={handleSubmit} className="mt-6 w-full">
                     <div className="mb-6 w-full">
                         <label htmlFor="useremail" className="block text-sm font-medium leading-6 text-gray-50">Email</label>
-                        <input onChange={handleChange} id="useremail" name="useremail" type="email" autoComplete="email" value={formData.useremail} required className="block w-full rounded-md border-0 py-1.5 text-gray-300 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
-                    </div>
+                        <input
+                            onChange={handleChange}
+                            id="email"
+                            name="email"
+                            type="email"
+                            autoComplete="email"
+                            required
+                            placeholder=" Enter your email!"
+                            className="block w-full rounded-md border-0 py-1.5 text-gray-300 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>                    </div>
 
                     <div className="mb-6 w-full">
                         <label htmlFor="securityQuestionAnswer" className="block text-sm font-medium leading-6 text-gray-50">Security Question Answer</label>
