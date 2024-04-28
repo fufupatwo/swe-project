@@ -2,12 +2,12 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-export default function ForgotPassword() {
+export default function ForgotPasswordPage() {
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
-        email: '',
-        securityQuestion: ''
+        useremail: "",
+        securityQuestionAnswer: "",
     });
 
     const handleChange = (e) => {
@@ -21,85 +21,46 @@ export default function ForgotPassword() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post("http://localhost:4000/forgot_password_page", {
-                email: formData.email,
-                securityQuestion: formData.securityQuestion
-            });
-            console.log(response)
-            // Redirect or show a success message here
+            const res = await axios.post("http://localhost:4000/forgot_password", formData);
+            console.log(res);
+            navigate('/');
         } catch (error) {
             console.error("An error occurred:", error);
         }
+
+        setFormData({
+            useremail: "",
+            securityQuestionAnswer: "",
+        });
     };
 
     return (
-        <main id="content" role="main" className="w-full max-w-md mx-auto p-6">
-            <div className="mt-7 bg-white rounded-xl shadow-lg dark:bg-gray-800 dark:border-gray-700">
-                <div className="p-4 sm:p-7">
-                    <div className="text-center">
-                        <h1 className="block text-2xl font-bold text-gray-800 dark:text-white">Forgot password?</h1>
-                        <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-                            Remember your password?
-
-                        </p>
-                        <a className="text-blue-600 decoration-2 hover:underline font-medium" href="#">
-                            Login here
-                        </a>
+        <div className="flex min-h-screen items-center justify-center">
+            <div className="w-96 p-6 flex flex-col items-center justify-center shadow-lg bg-orange-500 rounded-md">
+                <h2 className="mt-10 text-center text-2xl font-bold leading-9 text-gray-900">
+                    Forgot Password
+                </h2>
+                <form onSubmit={handleSubmit} className="mt-6 w-full">
+                    <div className="mb-6 w-full">
+                        <label htmlFor="useremail" className="block text-sm font-medium leading-6 text-gray-50">Email</label>
+                        <input onChange={handleChange} id="useremail" name="useremail" type="email" autoComplete="email" value={formData.useremail} required className="block w-full rounded-md border-0 py-1.5 text-gray-300 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                     </div>
 
-                    <div className="mt-5">
-                        <form onSubmit={handleSubmit}>
-                            <div className="grid gap-y-4">
-                                <div>
-                                    <label htmlFor="email" className="block text-sm font-bold ml-1 mb-2 dark:text-white">Email address</label>
-                                    <div className="relative">
-                                        <input
-                                            type="email"
-                                            id="email"
-                                            name="email"
-                                            value={formData.email}
-                                            onChange={handleChange}
-                                            className="py-3 px-4 block w-full border-2 border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 shadow-sm"
-                                            placeholder="Enter your email address"
-                                            required
-                                            aria-describedby="email-error"
-                                            style={{color: 'black'}} // Apply inline style to set text color to black
-                                        />
-                                    </div>
-                                </div>
-                                <div>
-                                    <label htmlFor="securityQuestion"
-                                           className="block text-sm font-bold ml-1 mb-2 dark:text-white">Security
-                                        Question</label>
-                                    <div className="relative">
-                                        <input
-                                            type="text"
-                                            id="securityQuestion"
-                                            name="securityQuestion"
-                                            value={formData.securityQuestion}
-                                            onChange={handleChange}
-                                            className="py-3 px-4 block w-full border-2 border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 shadow-sm"
-                                            placeholder="What city were you born in?"
-                                            required
-                                            aria-describedby="security-question-error"
-                                            style={{color: 'black'}} // Apply inline style to set text color to black
-                                        />
-
-                                    </div>
-                                </div>
-                                <button
-                                    type="submit"
-                                    className="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
-                                >
-                                    Reset password
-                                </button>
-                            </div>
-                        </form>
+                    <div className="mb-6 w-full">
+                        <label htmlFor="securityQuestionAnswer" className="block text-sm font-medium leading-6 text-gray-50">Security Question Answer</label>
+                        <input onChange={handleChange} id="securityQuestionAnswer" name="securityQuestionAnswer" type="password" autoComplete="current-password" value={formData.securityQuestionAnswer} required className="block w-full rounded-md border-0 py-1.5 text-gray-300 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                     </div>
-                </div>
+
+                    <div className="w-full">
+                        <button type="submit" className="w-full rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Submit</button>
+                    </div>
+                </form>
+
+                <p className="mt-2 text-center text-sm text-gray-500">
+                    Not a member?{' '}
+                    <a href="/CreateAccount" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">Create Account</a>
+                </p>
             </div>
-
-
-        </main>
+        </div>
     );
 }
