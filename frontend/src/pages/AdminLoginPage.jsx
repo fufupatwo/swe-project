@@ -6,8 +6,8 @@ export default function AdminLoginPage() {
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
-        username: "",
-        password: "",
+        admin_username: "",
+        admin_password: "",
     });
 
     const handleChange = (e) => {
@@ -21,21 +21,15 @@ export default function AdminLoginPage() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            // Send login request to admin login endpoint
-            const res = await axios.post("http://localhost:4000/admin/login", formData);
-            console.log(res);
-
-            // If login successful, navigate to admin dashboard
-            navigate('/admin/dashboard');
+            const response = await axios.post("http://localhost:4000/admin", {
+                admin_username: formData.admin_username,
+                admin_password: formData.admin_password,
+            });
+            console.log(response);
+            navigate('/admin-dashboard');
         } catch (error) {
             console.error("An error occurred:", error);
         }
-
-        // Clear form data after submission
-        setFormData({
-            username: "",
-            password: "",
-        });
     };
 
     return (
@@ -46,17 +40,17 @@ export default function AdminLoginPage() {
                 </h2>
                 <form onSubmit={handleSubmit} className="mt-6 w-full">
                     <div className="mb-6 w-full">
-                        <label htmlFor="username" className="block text-sm font-bold leading-6 text-gray-900">Username</label>
-                        <input onChange={handleChange} id="username" name="username" type="text" autoComplete="username"
-                               value={formData.username} required
+                        <label htmlFor="admin_username" className="block text-sm font-bold leading-6 text-gray-900">Username</label>
+                        <input onChange={handleChange} id="admin_username" name="admin_username" type="text" autoComplete="username"
+                               value={formData.admin_username} required
                                placeholder=" Enter your username"
                                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
                     </div>
 
                     <div className="mb-6 w-full">
-                        <label htmlFor="password" className="block text-sm font-bold leading-6 text-gray-900">Password</label>
-                        <input onChange={handleChange} id="password" name="password" type="password"
-                               autoComplete="current-password" value={formData.password} required
+                        <label htmlFor="admin_password" className="block text-sm font-bold leading-6 text-gray-900">Password</label>
+                        <input onChange={handleChange} id="admin_password" name="admin_password" type="password"
+                               autoComplete="current-password" value={formData.admin_password} required
                                placeholder=" Enter your password"
                                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
                     </div>
@@ -68,8 +62,6 @@ export default function AdminLoginPage() {
                         </button>
                     </div>
                 </form>
-
-
             </div>
         </div>
     );
