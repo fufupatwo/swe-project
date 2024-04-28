@@ -17,6 +17,7 @@ export default function LoginPage() {
       [name]: value
     });
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -41,17 +42,19 @@ export default function LoginPage() {
           </h2>
           <form onSubmit={handleSubmit} className="mt-6 w-full">
             <div className="mb-6 w-full">
-              <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">Email</label>
+              <label htmlFor="email" className="block text-sm font-bold leading-6 text-gray-900">Email</label>
               <input onChange={handleChange} id="useremail" name="useremail" type="email" autoComplete="email"
                      value={formData.useremail} required
-                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
+                     placeholder=" Enter your email"
+                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
             </div>
 
             <div className="mb-6 w-full">
-              <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">Password</label>
+              <label htmlFor="password" className="block text-sm font-bold leading-6 text-gray-900">Password</label>
               <input onChange={handleChange} id="password" name="password" type="password"
                      autoComplete="current-password" value={formData.password} required
-                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
+                     placeholder=" Enter your password"
+                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
             </div>
 
             <div className="w-full">
