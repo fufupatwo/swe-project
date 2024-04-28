@@ -33,16 +33,14 @@ export default function LandingPage() {
       </div>
       <div className="h-[100%] flex flex-col bg-[#f9f9f9] items-center justify-evenly py-16 gap-16">
         <div className="flex flex-col items-center lg:max-w-[50%] max-w-[80%] gap-2 text-center">
-          <h3 className="text-xl text-gray-500">Features</h3>
           <h1 className="text-gray-950 lg:text-3xl text-2xl">
             Support The Local UTSA Economy.
           </h1>
-          <h2 className="">
+          <h2 className="text-gray-950">
             There are countless ways to buy and sell items that makes supporting
             the local campus ecosystem a breeze.
           </h2>
         </div>
-        <InfoBox></InfoBox>
       </div>
     </>
   );
