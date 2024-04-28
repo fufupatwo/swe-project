@@ -1,7 +1,7 @@
 import express from "express";
 import session from "express-session";
 import dotenv from "dotenv";
-import {createUserRoute, loginRoute, adminLoginRoute, adminBanUserRoute, forgotPasswordRoute} from "./routes.mjs";
+import {createUserRoute, loginRoute, adminLoginRoute, adminBanUserRoute, forgotPasswordRoute, updatePasswordRoute} from "./routes.mjs";
 import {allPostsRoute} from "./viewAllPosts.mjs"
 import { addCartRoute } from "./cart.mjs";
 import { postCreationRoute } from "./createpostroute.mjs";
@@ -34,6 +34,7 @@ app.get("/home", allPostsRoute);
 app.post("/")
 app.post("/add_to_cart", addCartRoute);
 app.post("/forgot_password",forgotPasswordRoute);
+app.post("/update_password", updatePasswordRoute)
 
 
 const PORT = process.env.PORT || 4000; // Default port 5173

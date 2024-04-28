@@ -220,3 +220,38 @@ export const forgotPasswordRoute = async (req, res) => {
         return res.status(500).json({ error: "Server error" });
     }
 };
+
+// Route to update user password
+export const updatePasswordRoute = async (req, res) => {
+    const { useremail, password } = req.body;
+
+    try {
+        // Hash the new password
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        // Updating user's new pass
+        const sqlUpdate = "UPDATE userinfo SET password = ? WHERE useremail = ?";
+        const updateQuery = mysql.format(sqlUpdate, [hashedPassword, useremail]);
+
+        db.getConnection(async (err, connection) => {
+            if (err) {
+                console.error("Error getting database connection:", err);
+                return res.status(500).json({ error: "Server error" });
+            }
+
+            connection.query(updateQuery, (err, result) => {
+                connection.release();
+                if (err) {
+                    console.error("Error updating user's password:", err);
+                    return res.status(500).json({ error: "Server error" });
+                }
+
+                console.log("Password updated successfully");
+                return res.status(200).json({ message: "Password updated successfully" });
+            });
+        });
+    } catch (error) {
+        console.error("Error hashing password:", error);
+        return res.status(500).json({ error: "Server error" });
+    }
+};
