@@ -130,10 +130,7 @@ export default function CreateAccount() {
               </button>
             </div>
           </form>
-          <p className="mt-2 text-center text-sm text-gray-500">
-            {' '}
-            <a href="/ForgotPasswordPage" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">Forgot Password?</a>
-          </p>
+
           <p className="mt-2 text-center text-sm text-gray-500">
             Already have an account?{' '}
             <a href="/" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">Login</a>
