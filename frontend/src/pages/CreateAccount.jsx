@@ -61,7 +61,7 @@ export default function CreateAccount() {
                   autoComplete="given-name"
                   placeholder=" Enter your first name"
                   required
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-300 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
             </div>
             <div className="mt-6">
               <label htmlFor="lastName"className="block text-sm font-bold leading-6 text-black">Last Name</label>
@@ -73,7 +73,7 @@ export default function CreateAccount() {
                   autoComplete="family-name"
                   required
                   placeholder=" Enter your last name"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-300 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
             </div>
             <div className="mt-6">
               <label htmlFor="email" className="block text-sm font-bold leading-6 text-black">Email</label>
@@ -85,7 +85,7 @@ export default function CreateAccount() {
                   autoComplete="email"
                   required
                   placeholder=" Enter your email"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-300 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
             </div>
             <div className="mt-6">
               <label htmlFor="password" className="block text-sm font-bold leading-6 text-black">Password</label>
@@ -97,7 +97,7 @@ export default function CreateAccount() {
                   autoComplete="new-password"
                   required
                   placeholder=" Enter your password"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-300 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
             </div>
             <div className="mt-6">
               <label htmlFor="passwordConfirm" className="block text-sm font-bold leading-6 text-black">Confirm Password</label>
@@ -109,7 +109,7 @@ export default function CreateAccount() {
                   autoComplete="new-password"
                   required
                   placeholder=" Confirm your password"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-300 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
             </div>
             <div className="mt-6">
               <label htmlFor="securityQuestion" className="block text-sm font-bold leading-6 text-black">Security Question</label>
@@ -121,7 +121,7 @@ export default function CreateAccount() {
                   autoComplete="off"
                   required
                   placeholder=" What city were you born in?"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-300 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               />
             </div>
             <div className="mt-6">
