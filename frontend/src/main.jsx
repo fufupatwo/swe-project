@@ -7,7 +7,6 @@ import LoginPage from './pages/LoginPage';
 import CreateAccount from './pages/CreateAccount';
 import HomePage from './pages/HomePage';
 import ForgotPassword from "./pages/ForgotPasswordPage.jsx";
-import Test from "./pages/test";
 import axios from "axios";
 import Paypage from './pages/Paypage'
 import LandingPage from './pages/LandingPage';
