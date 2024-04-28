@@ -186,4 +186,66 @@ export const adminBanUserRoute = async (req, res) => {
     });
 };
 
+export const forgotPasswordRoute = async (req, res) => {
+    const { useremail, security, password, confirmPassword } = req.body;
 
+    try {
+        // Check if the user exists and security question answer is correct
+        const sqlSearch = "SELECT * FROM userinfo WHERE useremail = ?";
+        const searchQuery = mysql.format(sqlSearch, [useremail]);
+
+        db.query(searchQuery, async (err, result) => {
+            if (err) {
+                console.error("Error searching for user:", err);
+                return res.status(500).json({ error: "Server error" });
+            }
+
+            if (result.length === 0) {
+                console.log("User not found");
+                return res.status(404).json({ error: "User not found" });
+            }
+
+            // Check if security question answer matches
+            if (result[0].security !== security) {
+                console.log("Security question answer incorrect");
+                return res.status(401).json({ error: "Security question answer incorrect" });
+            }
+
+
+
+
+            if (password !== confirmPassword) {
+                console.log("Passwords do not match");
+                return res.status(400).json({ error: "Passwords do not match" });
+            }
+
+            // Hash the new password
+            const hashedPassword = await bcrypt.hash(password, 10);
+
+            // Update user's password
+            const sqlUpdate = "UPDATE userinfo SET password = ? WHERE useremail = ?";
+            const updateQuery = mysql.format(sqlUpdate, [hashedPassword, useremail]);
+
+            db.getConnection(async (err, connection) => {
+                if (err) {
+                    console.error("Error getting database connection:", err);
+                    return res.status(500).json({ error: "Server error" });
+                }
+
+                connection.query(updateQuery, (err, result) => {
+                    connection.release();
+                    if (err) {
+                        console.error("Error updating user's password:", err);
+                        return res.status(500).json({ error: "Server error" });
+                    }
+
+                    console.log("Password updated successfully");
+                    return res.status(200).json({ message: "Password updated successfully" });
+                });
+            });
+        });
+    } catch (error) {
+        console.error("Error handling forgot password:", error);
+        return res.status(500).json({ error: "Server error" });
+    }
+};

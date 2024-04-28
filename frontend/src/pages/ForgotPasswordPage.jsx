@@ -7,7 +7,7 @@ export default function ForgotPasswordPage() {
 
     const [formData, setFormData] = useState({
         useremail: "",
-        securityQuestionAnswer: "",
+        securityQuestion: ""
     });
 
     const handleChange = (e) => {
@@ -21,17 +21,18 @@ export default function ForgotPasswordPage() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post("http://localhost:4000/forgot_password", formData);
-            console.log(res);
-            navigate('/');
+            const response = await axios.post("http://localhost:4000/forgot_password", {
+                useremail: formData.useremail,
+                securityQuestion: formData.securityQuestion
+            });
+            console.log(response);
+            if (response.status === 200) {
+                console.log("Sending you to password reset page");
+                navigate('/');
+            }
         } catch (error) {
             console.error("An error occurred:", error);
         }
-
-        setFormData({
-            useremail: "",
-            securityQuestionAnswer: "",
-        });
     };
 
     return (
@@ -45,16 +46,18 @@ export default function ForgotPasswordPage() {
                         <label htmlFor="useremail" className="block text-sm font-medium leading-6 text-black">Email</label>
                         <input
                             onChange={handleChange}
-                            id="email"
-                            name="email"
+                            id="useremail"
+                            name="useremail"
                             type="email"
                             autoComplete="email"
                             required
                             placeholder=" Enter your email!"
-                            className="block w-full rounded-md border-0 py-1.5 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>                    </div>
+                            className="block w-full rounded-md border-0 py-1.5 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        />
+                    </div>
 
                     <div className="mb-6 w-full">
-                        <label htmlFor="securityQuestionAnswer" className="block text-sm font-medium leading-6 text-black">Security Question Answer</label>
+                        <label htmlFor="securityQuestion" className="block text-sm font-medium leading-6 text-black">Security Question Answer</label>
                         <input
                             onChange={handleChange}
                             id="securityQuestion"
@@ -64,7 +67,8 @@ export default function ForgotPasswordPage() {
                             required
                             placeholder=" What city were you born in?"
                             className="block w-full rounded-md border-0 py-1.5 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                        />                    </div>
+                        />
+                    </div>
 
                     <div className="w-full">
                         <button type="submit" className="w-full rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Submit</button>

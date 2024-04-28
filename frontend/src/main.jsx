@@ -11,6 +11,8 @@ import axios from "axios";
 import Paypage from './pages/Paypage'
 import LandingPage from './pages/LandingPage';
 import PostDetailPage from './pages/PostDetailPage.jsx';
+import AdminLogin from './pages/AdminLoginPage.jsx';
+import AdminDash from './pages/AdminDashboardPage';
 
 
 const router = createBrowserRouter([
@@ -43,7 +45,13 @@ const router = createBrowserRouter([
     path: "/post/:item_id",
     element: <PostDetailPage />
   },
-  
+    path: '/AdminLoginPage',
+    element: <AdminLogin/>,
+  },
+  {
+    path: '/AdminDashboardPage',
+    element: <AdminDash/>,
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
