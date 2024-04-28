@@ -76,10 +76,21 @@ const HomePage = () => {
   };
 
   const renderImage = (photo) => {
-    if (!photo || !photo.data) return <div>Image not available</div>;
-    const base64Image = arrayBufferToBase64(photo.data);
-    return <img src={`data:image/jpeg;base64,${base64Image}`} alt="Item" style={{ maxWidth: "200px" }} />;
-  };
+  if (!photo || !photo.data) return <div>Image not available</div>;
+  const base64Image = arrayBufferToBase64(photo.data);
+  return (
+    <img
+      src={`data:image/jpeg;base64,${base64Image}`}
+      alt="Item"
+      style={{
+        maxWidth: "100%",
+        maxHeight: "100%",
+        objectFit: "cover", // Ensure the image covers its container
+      }}
+    />
+  );
+};
+
 
   const arrayBufferToBase64 = (buffer) => {
     let binary = "";
@@ -92,17 +103,17 @@ const HomePage = () => {
   };
 
   return (
-    <div>
-      <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-        <h2 className="text-2xl font-bold tracking-tight text-gray-900">Recent Posts</h2>
+      <div>
+        <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+          <h2 className="text-2xl font-bold tracking-tight text-gray-900">Recent Posts</h2>
 
-        <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-          {posts.map((post, index) => (
-              <div key={index} className="group relative">
-                <div className="aspect-w-1 aspect-h-1 overflow-hidden bg-gray-200">
+          <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+            {posts.map((post, index) => (
+              <div key={index} className="group relative rounded-md overflow-hidden bg-gray-200">
+                <div className="aspect-w-1 aspect-h-1">
                   {renderImage(post.photo)}
                 </div>
-                <div className="mt-4 flex justify-between">
+                <div className="p-4 flex justify-between">
                   <div>
                     <h3 className="text-sm text-gray-700">{post.itemtitle}</h3>
                     <p className="mt-1 text-sm text-gray-500">{post.itemdescription}</p>
@@ -110,9 +121,9 @@ const HomePage = () => {
                   <p className="text-sm font-medium text-gray-900">${post.itemprice}</p>
                 </div>
               </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
 
       <div>
         <div className="flex justify-center items-center">
