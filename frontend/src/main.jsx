@@ -1,19 +1,16 @@
-
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'; 
-import './index.css';
-import LoginPage from './pages/LoginPage';
-import CreateAccount from './pages/CreateAccount';
-import HomePage from './pages/HomePage';
+import "./index.css";
+import React from "react";
+import ReactDOM from "react-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import LoginPage from "./pages/LoginPage";
+import CreateAccount from "./pages/CreateAccount";
+import HomePage from "./pages/HomePage";
 import ForgotPassword from "./pages/ForgotPasswordPage.jsx";
-import axios from "axios";
-import Paypage from './pages/Paypage'
-import LandingPage from './pages/LandingPage';
-import PostDetailPage from './pages/PostDetailPage.jsx';
-import AdminLogin from './pages/AdminLoginPage.jsx';
-import AdminDash from './pages/AdminDashboardPage';
-
+import Paypage from "./pages/Paypage";
+import LandingPage from "./pages/LandingPage";
+import PostDetailPage from "./pages/PostDetailPage.jsx";
+import AdminLogin from "./pages/AdminLoginPage.jsx";
+import AdminDash from "./pages/AdminDashboardPage";
 
 const router = createBrowserRouter([
   {
@@ -29,12 +26,11 @@ const router = createBrowserRouter([
     element: <HomePage />,
   },
   {
-    path: '/Pay',
-    element: <Paypage/>,
+    path: "/Pay",
+    element: <Paypage />,
   },
-   {
-
-    path: '/ForgotPasswordPage',
+  {
+    path: "/ForgotPasswordPage",
     element: <ForgotPassword />,
   },
   {
@@ -46,12 +42,12 @@ const router = createBrowserRouter([
     element: <PostDetailPage />,
   },
   {
-    path: '/AdminLoginPage',
-    element: <AdminLogin/>,
+    path: "/AdminLoginPage",
+    element: <AdminLogin />,
   },
   {
-    path: '/AdminDashboardPage',
-    element: <AdminDash/>,
+    path: "/AdminDashboardPage",
+    element: <AdminDash />,
   },
 ]);
 
