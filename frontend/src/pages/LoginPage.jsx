@@ -23,7 +23,7 @@ export default function LoginPage() {
     try {
       const res = await axios.post("http://localhost:4000/login", formData);
       console.log(res);
-      navigate('/');
+      navigate('/home');
     } catch (error) {
       console.error("An error occurred:", error);
     }
