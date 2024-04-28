@@ -138,7 +138,10 @@ const HomePage = () => {
           </button>
           <button
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-              onClick={() => console.log("Logged out")} // Add your logout logic here
+              onClick={() => {
+                console.log("Logged out");
+                window.location.href = "/";
+              }}
               style={{position: "absolute", top: "20px", right: "20px"}}
           >
             Log Out
