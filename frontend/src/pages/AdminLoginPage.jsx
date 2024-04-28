@@ -26,7 +26,7 @@ export default function AdminLoginPage() {
                 admin_password: formData.admin_password,
             });
             console.log(response);
-            navigate('/admin-dashboard');
+            navigate('/AdminDashboardPage');
         } catch (error) {
             console.error("An error occurred:", error);
         }
