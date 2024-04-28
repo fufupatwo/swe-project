@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useLoaderData } from "react-router-dom";
+import { Link } from "react-router-dom";
+
 
 const HomePage = () => {
   const [posts, setPosts] = useState([]);
@@ -104,26 +106,26 @@ const HomePage = () => {
 
   return (
       <div>
-        <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-          <h2 className="text-2xl font-bold tracking-tight text-gray-300">Recent Posts</h2>
+      <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+        <h2 className="text-2xl font-bold tracking-tight text-gray-300">Recent Posts</h2>
 
-          <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-            {posts.map((post, index) => (
-              <div key={index} className="group relative rounded-md overflow-hidden bg-gray-200">
-                <div className="aspect-w-1 aspect-h-1">
-                  {renderImage(post.photo)}
-                </div>
-                <div className="p-4 flex justify-between">
-                  <div>
-                    <h3 className="text-sm text-gray-700">{post.itemtitle}</h3>
-                    <p className="mt-1 text-sm text-gray-500">{post.itemdescription}</p>
-                  </div>
-                  <p className="text-sm font-medium text-gray-900">${post.itemprice}</p>
-                </div>
+        <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+          {posts.slice().reverse().map((post) => (
+            <Link to={`/post/${post.item_id}`} key={post.item_id} className="group relative rounded-md overflow-hidden bg-gray-200">
+              <div className="aspect-w-1 aspect-h-1">
+                {renderImage(post.photo)}
               </div>
-            ))}
-          </div>
+              <div className="p-4 flex justify-between">
+                <div>
+                  <h3 className="text-sm text-gray-700">{post.itemtitle}</h3>
+                  <p className="mt-1 text-sm text-gray-500">{post.itemdescription}</p>
+                </div>
+                <p className="text-sm font-medium text-gray-900">${post.itemprice}</p>
+              </div>
+            </Link>
+          ))}
         </div>
+      </div>
 
       <div>
         <div className="flex justify-center items-center">

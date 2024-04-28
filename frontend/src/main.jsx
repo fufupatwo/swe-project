@@ -10,6 +10,7 @@ import ForgotPassword from "./pages/ForgotPasswordPage.jsx";
 import axios from "axios";
 import Paypage from './pages/Paypage'
 import LandingPage from './pages/LandingPage';
+import PostDetailPage from './pages/PostDetailPage.jsx';
 
 
 const router = createBrowserRouter([
@@ -38,6 +39,11 @@ const router = createBrowserRouter([
     path: "/login",
     element: <LoginPage />,
   },
+  {
+    path: "/post/:item_id",
+    element: <PostDetailPage />
+  },
+  
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

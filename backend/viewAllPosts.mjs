@@ -9,7 +9,7 @@ export const allPostsRoute = async (req, res) => {
                 return res.status(500).json({ error: "Server error" });
             }
 
-            const sqlFetchPosts = "SELECT photo, itemtitle, itemdescription, itemprice FROM item_listing";
+            const sqlFetchPosts = "SELECT item_id, photo, itemtitle, itemdescription, itemprice FROM item_listing";
             connection.query(sqlFetchPosts, (err, posts) => {
                 connection.release();
                 if (err) {
@@ -26,4 +26,3 @@ export const allPostsRoute = async (req, res) => {
         return res.status(500).json({ error: "Server error" });
     }
 };
-
