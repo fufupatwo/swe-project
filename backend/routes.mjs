@@ -186,7 +186,6 @@ export const adminBanUserRoute = async (req, res) => {
     });
 };
 
-
 export const forgotPasswordRoute = async (req, res) => {
     const { useremail, security } = req.body;
 
@@ -207,7 +206,7 @@ export const forgotPasswordRoute = async (req, res) => {
             }
 
             // Check if security question answer matches
-            if (result[0].security !== security) {
+            if (result[0].securityQuestion !== security) { // Use 'securityQuestion' instead of 'security'
                 console.log("Security question answer incorrect");
                 return res.status(401).json({ error: "Security question answer incorrect" });
             }
