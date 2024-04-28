@@ -37,12 +37,12 @@ export default function ForgotPasswordPage() {
     return (
         <div className="flex min-h-screen items-center justify-center">
             <div className="w-96 p-6 flex flex-col items-center justify-center shadow-lg bg-orange-500 rounded-md">
-                <h2 className="mt-10 text-center text-2xl font-bold leading-9 text-gray-900">
+                <h2 className="mt-10 text-center text-2xl font-bold leading-9 text-black">
                     Forgot Password
                 </h2>
                 <form onSubmit={handleSubmit} className="mt-6 w-full">
                     <div className="mb-6 w-full">
-                        <label htmlFor="useremail" className="block text-sm font-medium leading-6 text-gray-50">Email</label>
+                        <label htmlFor="useremail" className="block text-sm font-medium leading-6 text-black">Email</label>
                         <input
                             onChange={handleChange}
                             id="email"
@@ -51,10 +51,10 @@ export default function ForgotPasswordPage() {
                             autoComplete="email"
                             required
                             placeholder=" Enter your email!"
-                            className="block w-full rounded-md border-0 py-1.5 text-gray-300 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>                    </div>
+                            className="block w-full rounded-md border-0 py-1.5 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>                    </div>
 
                     <div className="mb-6 w-full">
-                        <label htmlFor="securityQuestionAnswer" className="block text-sm font-medium leading-6 text-gray-50">Security Question Answer</label>
+                        <label htmlFor="securityQuestionAnswer" className="block text-sm font-medium leading-6 text-black">Security Question Answer</label>
                         <input
                             onChange={handleChange}
                             id="securityQuestion"
@@ -63,7 +63,7 @@ export default function ForgotPasswordPage() {
                             autoComplete="off"
                             required
                             placeholder=" What city were you born in?"
-                            className="block w-full rounded-md border-0 py-1.5 text-gray-300 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            className="block w-full rounded-md border-0 py-1.5 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                         />                    </div>
 
                     <div className="w-full">
