@@ -71,34 +71,36 @@ export default function Header() {
         style={headerStyles[theme]}
         ref={headerElement}
       >
-        <h1 className="text-xl md:text-2xl lg:text-3xl">Rowdy Marketplace</h1>
+        <h1 className="text-xl md:text-2xl lg:text-3xl" style={{ color: theme === "white" ? "#0c2340" : "#ffffff" }}>
+  Rowdy Marketplace
+</h1>
+
         {!undersize ? (
           <>
             <nav className="flex items-center justify-center gap-16 flex-1 [&>a:hover]:text-orange-500">
-              <a>Home</a>
-              <a href="/catalog">Catalog</a>
-              <a href="/home">Create Post</a>
             </nav>
             <a
               className="px-8 py-2 rounded-lg hover:!border-orange-500 hover:text-orange-500"
               style={{
                 border: "2px solid #ffffff",
                 borderColor: theme == "white" ? "#222222" : "#ffffff",
+                color: theme === "white" ? "#0c2340" : "#ffffff",
               }}
               id="login"
-              href="/"
+              href="/Login"
             >
               Log In
             </a>
           </>
         ) : (
           <button
-            className="text-2xl"
-            style={{ color: theme == "white" ? "#222222" : undefined }}
-            onClick={() => setDropdownToggled(!dropdownToggled)}
-          >
-            ...
-          </button>
+  className="text-2xl"
+  style={{ color: theme === "white" ? "#222222" : "#ffffff" }}
+  onClick={() => setDropdownToggled(!dropdownToggled)}
+>
+  ...
+</button>
+
         )}
         <HeaderDropdown display={dropdownToggled} offset={headerHeight}>
           <a>Home</a>
