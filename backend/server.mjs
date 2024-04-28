@@ -33,7 +33,7 @@ app.post("/post_creation", postCreationRoute);
 app.get("/home", allPostsRoute);
 app.post("/")
 app.post("/add_to_cart", addCartRoute);
-//app.post("/forgot_password_page",forgotPasswordRoute);
+//app.post("/forgot_password",forgotPasswordRoute);
 
 
 const PORT = process.env.PORT || 4000; // Default port 5173
