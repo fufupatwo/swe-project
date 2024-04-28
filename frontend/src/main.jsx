@@ -43,8 +43,9 @@ const router = createBrowserRouter([
   },
   {
     path: "/post/:item_id",
-    element: <PostDetailPage />
+    element: <PostDetailPage />,
   },
+  {
     path: '/AdminLoginPage',
     element: <AdminLogin/>,
   },
