@@ -18,26 +18,31 @@ export default function LoginPage() {
       [name]: value,
     });
   };
-
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault(); // Prevent default form submission behavior
+
     try {
       const res = await axios.post("http://localhost:4000/login", formData);
       console.log(res);
-      navigate("/home");
-    } catch (error) {
-      console.error("You are banned. Please contact support.", error);
-      // Check if the error message indicates user is banned
-      if (
-        error.response &&
-        error.response.data.error === "You are banned. Please contact support."
-      ) {
+
+      // Check if the response indicates user is banned
+      if (res.data === "You are banned. Please contact admin.") {
         setErrorMessage("You are banned. Please contact support.");
+      } else if (res.data === "Password incorrect") {
+        setErrorMessage("Incorrect password.");
       } else {
-        setErrorMessage("You are banned. Please contact support.");
+        // User is not banned and password is correct, navigate to home page
+        navigate("/home");
       }
+    } catch (error) {
+      console.error("An error occurred:", error);
+
+      // Handle other errors
+      setErrorMessage("An error occurred. Please try again later.");
     }
   };
+
+
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-utsablue">
