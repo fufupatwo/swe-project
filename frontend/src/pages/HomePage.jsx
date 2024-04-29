@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
-import { useLoaderData } from "react-router-dom";
 import { Link } from "react-router-dom";
-
 
 const HomePage = () => {
   const [posts, setPosts] = useState([]);
@@ -63,11 +61,15 @@ const HomePage = () => {
       formDataWithImage.append("useremail", formData.userEmail);
       formDataWithImage.append("photo", selectedFile); // Append the selected image file to the form data
 
-      const response = await axios.post("http://localhost:4000/post_creation", formDataWithImage, {
-        headers: {
-          "Content-Type": "multipart/form-data", // Set content type to multipart/form-data for file upload
+      const response = await axios.post(
+        "http://localhost:4000/post_creation",
+        formDataWithImage,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data", // Set content type to multipart/form-data for file upload
+          },
         },
-      });
+      );
 
       console.log(response.data);
       closeModal();
@@ -78,21 +80,16 @@ const HomePage = () => {
   };
 
   const renderImage = (photo) => {
-  if (!photo || !photo.data) return <div>Image not available</div>;
-  const base64Image = arrayBufferToBase64(photo.data);
-  return (
-    <img
-      src={`data:image/jpeg;base64,${base64Image}`}
-      alt="Item"
-      style={{
-        maxWidth: "100%",
-        maxHeight: "100%",
-        objectFit: "cover", // Ensure the image covers its container
-      }}
-    />
-  );
-};
-
+    if (!photo || !photo.data) return <div>Image not available</div>;
+    const base64Image = arrayBufferToBase64(photo.data);
+    return (
+      <img
+        src={`data:image/jpeg;base64,${base64Image}`}
+        alt="Item"
+        className="object-cover max-w-[100%] max-h-[100%]"
+      />
+    );
+  };
 
   const arrayBufferToBase64 = (buffer) => {
     let binary = "";
@@ -105,50 +102,63 @@ const HomePage = () => {
   };
 
   return (
-      <div>
+    <div className="bg-utsablue h-screen">
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-        <h2 className="text-2xl font-bold tracking-tight text-gray-300">Recent Posts</h2>
+        <h2 className="text-2xl font-bold tracking-tight text-gray-300">
+          Recent Posts
+        </h2>
 
         <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-          {posts.slice().reverse().map((post) => (
-            <Link to={`/post/${post.item_id}`} key={post.item_id} className="group relative rounded-md overflow-hidden bg-gray-200">
-              <div className="aspect-w-1 aspect-h-1">
-                {renderImage(post.photo)}
-              </div>
-              <div className="p-4 flex justify-between">
-                <div>
-                  <h3 className="text-sm text-gray-700">{post.itemtitle}</h3>
-                  <p className="mt-1 text-sm text-gray-500">{post.itemdescription}</p>
+          {posts
+            .slice()
+            .reverse()
+            .map((post) => (
+              <Link
+                to={`/post/${post.item_id}`}
+                key={post.item_id}
+                className="group rounded-md overflow-hidden bg-gray-200 flex flex-col justify-between"
+              >
+                <div className="max-h-64 w-full flex justify-center flex-grow">
+                  {renderImage(post.photo)}
                 </div>
-                <p className="text-sm font-medium text-gray-900">${post.itemprice}</p>
-              </div>
-            </Link>
-          ))}
+                <div className="p-4 flex justify-between">
+                  <div>
+                    <h3 className="text-sm text-gray-700">{post.itemtitle}</h3>
+                    <p className="mt-1 text-sm text-gray-500">
+                      {post.itemdescription}
+                    </p>
+                  </div>
+                  <p className="text-sm font-medium text-gray-900">
+                    ${post.itemprice}
+                  </p>
+                </div>
+              </Link>
+            ))}
         </div>
       </div>
 
       <div>
         <div className="flex justify-center items-center">
           <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-              onClick={openModal}
-              style={{position: "absolute", top: "20px", right: "150px"}}// Adjusted margin-right for spacing
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            onClick={openModal}
+            style={{ position: "absolute", top: "20px", right: "150px" }} // Adjusted margin-right for spacing
           >
             Create a Post!
           </button>
           <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-              onClick={() => {
-                console.log("Logged out");
-                window.location.href = "/";
-              }}
-              style={{position: "absolute", top: "20px", right: "20px"}}
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            onClick={() => {
+              console.log("Logged out");
+              window.location.href = "/";
+            }}
+            style={{ position: "absolute", top: "20px", right: "20px" }}
           >
             Log Out
           </button>
         </div>
         {isOpen && (
-            <div className="fixed inset-0 z-50 flex justify-center items-center bg-black bg-opacity-50">
+          <div className="fixed inset-0 z-50 flex justify-center items-center bg-black bg-opacity-50">
             <div className="flex flex-col w-11/12 sm:w-5/6 lg:w-1/2 max-w-2xl mx-auto rounded-lg border border-gray-300 shadow-xl">
               <div className="flex flex-row justify-between p-6 bg-white border-b border-gray-200 rounded-tl-lg rounded-tr-lg">
                 <p className="font-semibold text-gray-800">
@@ -183,7 +193,9 @@ const HomePage = () => {
                   required
                 />
                 {errors.title && (
-                  <span className="text-sm text-red-600">Title is required</span>
+                  <span className="text-sm text-red-600">
+                    Title is required
+                  </span>
                 )}
                 <div className="mb-2 font-semibold text-gray-700">
                   Item Description:
@@ -211,10 +223,14 @@ const HomePage = () => {
                   required
                 />
                 {errors.amount && (
-                  <span className="text-sm text-red-600">Amount is required</span>
+                  <span className="text-sm text-red-600">
+                    Amount is required
+                  </span>
                 )}
 
-                <div className="mb-2 font-semibold text-gray-700">Upload Image:</div>
+                <div className="mb-2 font-semibold text-gray-700">
+                  Upload Image:
+                </div>
                 <input
                   type="file"
                   accept="image/*"
@@ -234,7 +250,9 @@ const HomePage = () => {
                   required
                 />
                 {errors.userEmail && (
-                  <span className="text-sm text-red-600">Email is required</span>
+                  <span className="text-sm text-red-600">
+                    Email is required
+                  </span>
                 )}
                 {/* Image input and display removed */}
               </div>

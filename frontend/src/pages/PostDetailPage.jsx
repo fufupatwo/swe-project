@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
@@ -10,7 +10,9 @@ const PostDetailPage = () => {
     console.log("Item ID:", item_id); // Log itemid to console
     const fetchPost = async () => {
       try {
-        const response = await axios.get(`http://localhost:4000/post/${item_id}`);
+        const response = await axios.get(
+          `http://localhost:4000/post/${item_id}`,
+        );
         setPost(response.data);
       } catch (error) {
         console.error("Error fetching post:", error);
@@ -36,33 +38,33 @@ const PostDetailPage = () => {
       />
     );
   };
-  
-    const arrayBufferToBase64 = (buffer) => {
-      let binary = "";
-      const bytes = new Uint8Array(buffer);
-      const len = bytes.byteLength;
-      for (let i = 0; i < len; i++) {
-        binary += String.fromCharCode(bytes[i]);
-      }
-      return window.btoa(binary);
-    };
-    return (
-        <div className="flex items-center">
-          <div className="w-1/3">
-            <div className="aspect-w-1 aspect-h-1 rounded-lg overflow-hidden">
-              {renderImage(post.photo)}
-            </div>
-          </div>
-          <div className="w-2/3 px-8">
-            <h2 className="text-3xl font-bold mb-4">{post.itemtitle}</h2>
-            <p className="text-lg mb-4">{post.itemdescription}</p>
-            <p className="text-xl font-bold mb-4">${post.itemprice}</p>
-            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-              Add to Cart
-            </button>
-          </div>
+
+  const arrayBufferToBase64 = (buffer) => {
+    let binary = "";
+    const bytes = new Uint8Array(buffer);
+    const len = bytes.byteLength;
+    for (let i = 0; i < len; i++) {
+      binary += String.fromCharCode(bytes[i]);
+    }
+    return window.btoa(binary);
+  };
+  return (
+    <div className="flex bg-utsablue h-screen">
+      <div className="flex items-center justify-center rounded-lg">
+        <div className="rounded-lg overflow-hidden w-1/3">
+          {renderImage(post.photo)}
         </div>
-      );
+        <div className="px-8">
+          <h2 className="text-3xl font-bold mb-4">{post.itemtitle}</h2>
+          <p className="text-lg mb-4">{post.itemdescription}</p>
+          <p className="text-xl font-bold mb-4">${post.itemprice}</p>
+          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            Add to Cart
+          </button>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default PostDetailPage;
