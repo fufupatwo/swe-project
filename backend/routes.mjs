@@ -63,38 +63,41 @@ export const createUserRoute = async (req, res) => {
 
 // Login logic for authenticating a user
 export const loginRoute = async (req, res) => {
-    const { useremail, password } = req.body;
+    const useremail = req.body.useremail;
+    const password = req.body.password;
 
-    try {
-        const [user] = await db.query("SELECT * FROM userinfo WHERE useremail = ?", [useremail]);
+    db.getConnection(async (err, connection) => {
+        if (err) throw err;
+        const sqlSearch = "SELECT * FROM userinfo WHERE useremail = ?";
+        const search_query = mysql.format(sqlSearch, [useremail]);
 
-        if (!user) {
-            console.log("User does not exist");
-            return res.status(404).json({ error: "User not found" });
-        }
+        await connection.query(search_query, async (err, result) => {
+            connection.release();
+            if (err) throw err;
 
-        if (user.banned) {
-            console.log("User is banned");
-            return res.status(403).json({ error: "You are banned. Please contact admin." });
-        }
+            if (result.length === 0) {
+                console.log("---> user does not exist");
+                return res.sendStatus(404);
+            } else {
+                const banned = result[0].banned;
+                if (banned) {
+                    console.log("---> user is banned");
+                    return res.send("You are banned. Please contact admin.");
+                }
 
-        const hashedPassword = user.password;
-        const passwordMatch = await bcrypt.compare(password, hashedPassword);
-
-        if (passwordMatch) {
-            console.log("Login successful");
-            req.session.userid = user.userid;
-            return res.json({ success: true, message: `${useremail} is logged in!` });
-        } else {
-            console.log("Incorrect password");
-            return res.status(401).json({ error: "Incorrect password" });
-        }
-    } catch (error) {
-        console.error("An error occurred:", error);
-        return res.status(500).json({ error: "Server error" });
-    }
+                const hashedPassword = result[0].password;
+                if (await bcrypt.compare(password, hashedPassword)) {
+                    console.log("---> login was successful");
+                    req.session.userid = result[0].userid;
+                    return res.send(`${useremail} is logged in!`);
+                } else {
+                    console.log("---> pass was incorrect");
+                    return res.send("Password incorrect");
+                }
+            }
+        });
+    });
 };
-
 // Admin login route
 export const adminLoginRoute = async (req, res) => {
     const adminName = req.body.admin_username;
