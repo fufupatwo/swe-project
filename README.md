@@ -8,10 +8,10 @@ how to setup project locally
 - npm run dev
 
   **to view admin routes**
-  - http://localhost:5173/adminloginpage
+  http://localhost:5173/adminloginpage
   -     - username = admin
   -     - password = password
- - http://localhost:5173/admindashboardpage
+  http://localhost:5173/admindashboardpage
  -      - ban a user in database
 
 
@@ -39,8 +39,7 @@ DBPORT="3306"
 PORT=4000
 ```
 
-
-
+Run backend 
 - nodemon server.mjs
 
 
