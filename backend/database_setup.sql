@@ -52,3 +52,6 @@ CREATE TABLE IF NOT EXISTS cart (
     FOREIGN KEY (userid) REFERENCES userinfo(userid),
     FOREIGN KEY (item_id) REFERENCES item_listing(item_id)
     );
+
+INSERT INTO admin_information (admin_username, admin_password)
+VALUES ('admin', 'password');
