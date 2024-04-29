@@ -1,5 +1,8 @@
 # swe-project
 
+
+
+
 how to setup project locally
 
 - clone repo
@@ -26,6 +29,10 @@ Navigate to the Backend Directory:
 
 Open database_setup.sql
 - copy and paste into workbench to create schema, tables, and update admin table.
+
+![image](https://github.com/fufupatwo/swe-project/assets/114861274/56b3310f-b457-4adb-9790-4d1a76bfebde)
+
+
 
 CREATE .env file under backend dir
 
