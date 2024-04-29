@@ -34,7 +34,7 @@ export default function CreateAccount() {
         securityQuestion: formData.securityQuestion,
       });
       console.log(response);
-      navigate("/");
+      navigate("/home");
     } catch (error) {
       console.error("An error occurred:", error);
     }
