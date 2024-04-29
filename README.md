@@ -32,6 +32,9 @@ Open database_setup.sql
 
 ![image](https://github.com/fufupatwo/swe-project/assets/114861274/56b3310f-b457-4adb-9790-4d1a76bfebde)
 
+![image](https://github.com/fufupatwo/swe-project/assets/114861274/82183159-8319-4089-a9f0-fe943d0ac15e)
+![image](https://github.com/fufupatwo/swe-project/assets/114861274/c4eb59c1-ce55-4b92-8508-cc18e60ff455)
+
 
 
 CREATE .env file under backend dir
