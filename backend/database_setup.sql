@@ -13,14 +13,14 @@ CREATE TABLE IF NOT EXISTS userinfo (
     password VARCHAR(100),
     banned TINYINT,
     security VARCHAR(100) NOT NULL
-    );
+);
 
 -- Create Admin Information Table
 CREATE TABLE IF NOT EXISTS admin_information (
     adminid INT AUTO_INCREMENT PRIMARY KEY,
     admin_username VARCHAR(100) UNIQUE NOT NULL,
     admin_password VARCHAR(100) NOT NULL
-    );
+);
 
 -- Create Item Listing Table
 CREATE TABLE IF NOT EXISTS item_listing (
@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS item_listing (
     itemdescription TEXT NOT NULL,
     itemprice FLOAT NOT NULL,
     FOREIGN KEY (userid) REFERENCES userinfo(userid)
-    );
+);
 
 -- Create Transaction History Table
 CREATE TABLE IF NOT EXISTS transaction_history (
@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS transaction_history (
     trans_status VARCHAR(50) NOT NULL,
     FOREIGN KEY (item_id) REFERENCES item_listing(item_id),
     FOREIGN KEY (user_id) REFERENCES userinfo(userid)
-    );
+);
 
 -- Create Cart Table
 CREATE TABLE IF NOT EXISTS cart (
